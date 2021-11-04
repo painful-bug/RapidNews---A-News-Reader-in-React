@@ -49,9 +49,7 @@ export default class News extends Component {
     }
   };
 
-  // handleDemoClick = () => {
-  //   console.log("demo click working")
-  // }
+
   render() {
     return (
       <div className="container my-3">
