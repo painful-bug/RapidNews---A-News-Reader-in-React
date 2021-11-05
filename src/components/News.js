@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
+import { Link } from "react-scroll/modules";
 
 export default class News extends Component {
-
   static defaultProps = {
-    country: 'in',
+    country: "in",
     pageSize: 6,
-    category: 'general',
-  }
+    category: "general",
+  };
 
   static propTypes = {
     country: PropTypes.string,
     pageSize: PropTypes.number,
     category: PropTypes.string,
-  }
+  };
   articles = [];
   constructor() {
     super();
@@ -27,7 +27,6 @@ export default class News extends Component {
     };
   }
 
-  
   async componentDidMount() {
     this.setState({ loading: true });
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6`;
@@ -45,7 +44,11 @@ export default class News extends Component {
 
   handlePrevClick = async () => {
     this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
@@ -59,13 +62,16 @@ export default class News extends Component {
   };
 
   handleNextClick = async () => {
-    
     if (
       Math.ceil(this.state.totalResults / this.props.pageSize) <
       this.state.page + 1
     ) {
       this.setState({ loading: true });
-      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
+      let url = `https://newsapi.org/v2/top-headlines?country=${
+        this.props.country
+      }&category=${
+        this.props.category
+      }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
         this.state.page + 1
       }&pageSize=${this.props.pageSize}`;
       let data = await fetch(url);
@@ -77,11 +83,13 @@ export default class News extends Component {
         disableNextButton: false,
         loading: false,
       });
-
-
     } else {
       this.setState({ loading: true });
-      let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
+      let url = `https://newsapi.org/v2/top-headlines?country=${
+        this.props.country
+      }&category=${
+        this.props.category
+      }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
         this.state.page + 1
       }&pageSize=${this.props.pageSize}`;
       let data = await fetch(url);
@@ -94,27 +102,39 @@ export default class News extends Component {
         loading: false,
       });
     }
-
-
   };
 
   render() {
     return (
-      <div className="container my-3">
+      <div className="container my-3" id="news_starting">
         {this.state.loading ? (
           <Spinner />
         ) : (
           <div>
-              <h2 className="text-center my-3">RapidNews</h2>
-              <div className="container d-flex justify-content-between">
-              <button
+            {/* <h2 className="text-center my-3">RapidNews</h2> */}
+            <div className="container d-flex justify-content-between" >
+              
+                
+                
+                <button
                 disabled={this.state.page <= 1}
                 type="button"
                 className="btn btn-dark"
                 onClick={this.handlePrevClick}
               >
                 &larr; Previous
-              </button>
+                </button>
+                
+
+
+                <Link to="news_ending" smooth={true} duration={90}>
+                <button type="button" className="btn btn-dark">
+                  Jump to Bottom &darr;
+                </button>
+                </Link>
+
+
+
               <button
                 disabled={this.state.disableNextButton}
                 type="button"
@@ -123,7 +143,15 @@ export default class News extends Component {
               >
                 Next &rarr;
               </button>
-            </div>
+              </div>
+              
+
+
+
+
+
+
+
             <div className="row my-3">
               {this.state.articles.map((article) => {
                 return (
@@ -140,16 +168,39 @@ export default class News extends Component {
                   </div>
                 );
               })}
-            </div>
-            <div className="container d-flex justify-content-between">
-              <button
+              </div>
+              
+
+
+
+
+
+
+            <div className="container d-flex justify-content-between" id="news_ending">
+             
+             
+                <button
                 disabled={this.state.page <= 1}
                 type="button"
                 className="btn btn-dark"
                 onClick={this.handlePrevClick}
               >
                 &larr; Previous
-              </button>
+                </button>
+                
+
+
+
+
+
+              <Link to="news_starting" smooth={true} duration={90}>
+                <button type="button" className="btn btn-dark">
+                  Jump to Top &uarr;
+                </button>
+                </Link>
+                
+
+
               <button
                 disabled={this.state.disableNextButton}
                 type="button"
@@ -158,7 +209,11 @@ export default class News extends Component {
               >
                 Next &rarr;
               </button>
-            </div>
+              </div>
+              
+
+
+
           </div>
         )}
       </div>
