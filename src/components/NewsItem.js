@@ -10,7 +10,7 @@ export default class NewsItem extends Component {
 }
 
   render() {
-    let { title, description, urlToImage, newsUrl } = this.props;
+    let { title, description, urlToImage, newsUrl, author, source, publishedAt } = this.props;
     return (
       <div>
         <div className="card" style={{width: "18rem"}}>
@@ -23,6 +23,7 @@ export default class NewsItem extends Component {
             <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-dark">
               Read More
             </a>
+            <p class="card-text my-3"><small class="text-muted">By {author?author:"Unknown"} on {new Date(publishedAt).toUTCString()}</small></p>
           </div>
         </div>
       </div>

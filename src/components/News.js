@@ -27,6 +27,7 @@ export default class News extends Component {
     };
   }
 
+  
   async componentDidMount() {
     this.setState({ loading: true });
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6`;
@@ -39,6 +40,7 @@ export default class News extends Component {
       totalResults: parsedData.totalResults,
       loading: false,
     });
+    console.log(this.totalResults);
   }
 
   handlePrevClick = async () => {
@@ -131,6 +133,9 @@ export default class News extends Component {
                       description={article.description}
                       urlToImage={article.urlToImage}
                       newsUrl={article.url}
+                      author={article.author}
+                      source={article.source.name}
+                      publishedAt={article.publishedAt}
                     />
                   </div>
                 );
