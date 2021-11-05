@@ -112,28 +112,21 @@ export default class News extends Component {
         ) : (
           <div>
             {/* <h2 className="text-center my-3">RapidNews</h2> */}
-            <div className="container d-flex justify-content-between" >
-              
-                
-                
-                <button
+            <div className="container d-flex justify-content-between">
+              <button
                 disabled={this.state.page <= 1}
                 type="button"
                 className="btn btn-dark"
                 onClick={this.handlePrevClick}
               >
                 &larr; Previous
-                </button>
-                
+              </button>
 
-
-                <Link to="news_ending" smooth={true} duration={90}>
+              <Link to="news_ending" smooth={true} duration={90}>
                 <button type="button" className="btn btn-dark">
                   Jump to Bottom &darr;
                 </button>
-                </Link>
-
-
+              </Link>
 
               <button
                 disabled={this.state.disableNextButton}
@@ -143,14 +136,7 @@ export default class News extends Component {
               >
                 Next &rarr;
               </button>
-              </div>
-              
-
-
-
-
-
-
+            </div>
 
             <div className="row my-3">
               {this.state.articles.map((article) => {
@@ -168,38 +154,26 @@ export default class News extends Component {
                   </div>
                 );
               })}
-              </div>
-              
+            </div>
 
-
-
-
-
-
-            <div className="container d-flex justify-content-between" id="news_ending">
-             
-             
-                <button
+            <div
+              className="container d-flex justify-content-between"
+              id="news_ending"
+            >
+              <button
                 disabled={this.state.page <= 1}
                 type="button"
                 className="btn btn-dark"
                 onClick={this.handlePrevClick}
               >
                 &larr; Previous
-                </button>
-                
-
-
-
-
+              </button>
 
               <Link to="news_starting" smooth={true} duration={90}>
                 <button type="button" className="btn btn-dark">
                   Jump to Top &uarr;
                 </button>
-                </Link>
-                
-
+              </Link>
 
               <button
                 disabled={this.state.disableNextButton}
@@ -209,11 +183,7 @@ export default class News extends Component {
               >
                 Next &rarr;
               </button>
-              </div>
-              
-
-
-
+            </div>
           </div>
         )}
       </div>

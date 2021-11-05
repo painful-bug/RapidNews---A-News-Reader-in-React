@@ -36,7 +36,7 @@ export default class Home extends Component {
             Go to News
           </button>
         </Link>
-        
+
         <div id="news_section">
           <News
             key="general"
@@ -45,19 +45,6 @@ export default class Home extends Component {
             category="general"
           />
         </div>
-        {/* <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br /> */}
       </div>
     );
   }
