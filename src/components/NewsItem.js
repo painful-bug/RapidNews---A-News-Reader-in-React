@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import spinner from "./loading-spinner.gif"
 export default class NewsItem extends Component {
   constructor() {
     super();
@@ -15,7 +14,6 @@ export default class NewsItem extends Component {
       urlToImage,
       newsUrl,
       author,
-      source,
       publishedAt,
     } = this.props;
     return (
@@ -45,6 +43,8 @@ export default class NewsItem extends Component {
               <small class="text-muted">
                 By {author ? author : "Unknown"} on{" "}
                 {new Date(publishedAt).toUTCString()}
+
+                
               </small>
             </p>
           </div>

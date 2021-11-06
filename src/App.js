@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./components/NavBar";
-import News from "./components/News";
-import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+// import Home from "./components/Home";
+import { BrowserRouter as Router, Switch, Route,  } from "react-router-dom";
 import Home from "./components/Home";
 import "./App.css";
 
@@ -11,13 +11,13 @@ export default class App extends Component {
     return (
       <div className="">
         <Router>
-          <NavBar />
+          {/* <NavBar /> */}
           <Switch>
             <Route exact path="/">
               <Home />
             </Route>
             <Route exact path="/general">
-              <News
+              <Home
                 key="general"
                 pageSize={this.pageSize}
                 country="in"
@@ -25,7 +25,7 @@ export default class App extends Component {
               />
             </Route>
             <Route exact path="/business">
-              <News
+              <Home
                 key="business"
                 pageSize={this.pageSize}
                 country="in"
@@ -33,7 +33,7 @@ export default class App extends Component {
               />
             </Route>
             <Route exact path="/entertainment">
-              <News
+              <Home
                 key="entertainment"
                 pageSize={this.pageSize}
                 country="in"
@@ -41,7 +41,7 @@ export default class App extends Component {
               />
             </Route>
             <Route exact path="/health">
-              <News
+              <Home
                 key="health"
                 pageSize={this.pageSize}
                 country="in"
@@ -49,7 +49,7 @@ export default class App extends Component {
               />
             </Route>
             <Route exact path="/science">
-              <News
+              <Home
                 key="science"
                 pageSize={this.pageSize}
                 country="in"
@@ -57,7 +57,7 @@ export default class App extends Component {
               />
             </Route>
             <Route exact path="/sports">
-              <News
+              <Home
                 key="sports"
                 pageSize={this.pageSize}
                 country="in"
@@ -65,7 +65,7 @@ export default class App extends Component {
               />
             </Route>
             <Route exact path="/technology">
-              <News
+              <Home
                 key="technology"
                 pageSize={this.pageSize}
                 country="in"
@@ -74,7 +74,7 @@ export default class App extends Component {
             </Route>
           </Switch>
         </Router>
-        {/* <News pageSize={this.pageSize} country="in" category="technology" /> */}
+        {/* <Home pageSize={this.pageSize} country="in" category="technology" /> */}
       </div>
     );
   }

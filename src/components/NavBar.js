@@ -2,6 +2,27 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class NavBar extends Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+        query: "",
+    }
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      query: event.target.value
+    })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
+  
+
   render() {
     return (
       <div>
@@ -65,6 +86,18 @@ export default class NavBar extends Component {
                 </li>
               </ul>
             </div>
+            <form onSubmit={this.handleSubmit} className="d-flex">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                onChange={this.handleChange}
+              />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
           </div>
         </nav>
       </div>
