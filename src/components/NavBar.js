@@ -1,32 +1,37 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "../styles/Navbar.css"
 
 export default class NavBar extends Component {
 
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-        query: "",
+  listener = null;
+  state = {
+    nav:false
+  }
+  componentDidMount() {
+     window.addEventListener("scroll", this.handleScroll);
+   }
+   componentWillUnmount() {
+      window.removeEventListener('scroll');
     }
-  }
+   handleScroll= () => {
+     if (window.pageYOffset > 140) {
+         if(!this.state.nav){
+           this.setState({ nav: true });
+         }
+     }else{
+         if(this.state.nav){
+           this.setState({ nav: false });
+         }
+     }
 
-  handleChange = (event) => {
-    this.setState({
-      query: event.target.value
-    })
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-  }
-
-  
+   }
 
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        {/* <nav className={`navbar navbar-expand-lg navbar-dark bg-dark ${this.state.nav && 'Nav__black'}`}> */}
+        <nav className={`navbar navbar-expand-lg navbar-dark bg-dark navbarExtra scrolled`}>
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
               RapidNews
@@ -86,18 +91,21 @@ export default class NavBar extends Component {
                 </li>
               </ul>
             </div>
-            <form onSubmit={this.handleSubmit} className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                onChange={this.handleChange}
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+
+
+            <div className="form-check form-switch">
+          <input
+            className="form-check-input"
+            onClick={this.props.toggleMode}
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+          />
+          <label className="form-check-label text-light" htmlFor="flexSwitchCheckDefault">
+            Enable Dark Mode
+          </label>
+        </div>
+        
           </div>
         </nav>
       </div>

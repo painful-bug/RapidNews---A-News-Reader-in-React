@@ -4,6 +4,7 @@ export default class NewsItem extends Component {
     super();
     this.state = {
       loading: false,
+      // darkMode: false,
     };
   }
 
@@ -15,6 +16,7 @@ export default class NewsItem extends Component {
       newsUrl,
       author,
       publishedAt,
+      darkMode,
     } = this.props;
     return (
       <div>
@@ -28,9 +30,12 @@ export default class NewsItem extends Component {
             className="card-img-top"
             alt="..."
           />
-          <div className="card-body">
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{description}</p>
+            {console.log("from newsitem, darkmode : ",darkMode)}
+          {
+            darkMode === true ? (
+              <div className="card-body bg-dark">
+            <h5 className="card-title text-white">{title}</h5>
+            <p className="card-text text-white">{description}</p>
             <a
               rel="noreferrer"
               href={newsUrl}
@@ -39,8 +44,8 @@ export default class NewsItem extends Component {
             >
               Read More
             </a>
-            <p class="card-text my-3">
-              <small class="text-muted">
+            <p className="card-text my-3 text-white">
+              <small className="text-muted">
                 By {author ? author : "Unknown"} on{" "}
                 {new Date(publishedAt).toUTCString()}
 
@@ -48,6 +53,29 @@ export default class NewsItem extends Component {
               </small>
             </p>
           </div>
+            ) : (
+              <div className="card-body ">
+              <h5 className="card-title ">{title}</h5>
+              <p className="card-text">{description}</p>
+              <a
+                rel="noreferrer"
+                href={newsUrl}
+                target="_blank"
+                className="btn btn-dark"
+              >
+                Read More
+              </a>
+              <p className="card-text my-3">
+                <small className="text-muted">
+                  By {author ? author : "Unknown"} on{" "}
+                  {new Date(publishedAt).toUTCString()}
+  
+                  
+                </small>
+              </p>
+            </div>
+            )
+          }
         </div>
       </div>
     );

@@ -1,0 +1,42 @@
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .Nav {
+    margin-left: -40px;
+    position: fixed;
+    z-index: 2;
+  }
+  img ~ img  {
+    position: fixed;
+    right: 10px;
+    top:8px;
+  }
+  .Nav__logo{
+    margin-top: 12px;
+  }
+  .Nav__black{
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.95);
+    width: 100%;
+  }
+   */
+   .navbarExtra{
+    width: 100%;
+    min-height: 6vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eee;
+    transition: all .7s ease-in;
+  }
+  
+  .scrolled{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: lightblue;
+    z-index: 1;
+  }

@@ -1,80 +1,98 @@
 import React, { Component } from "react";
 import NavBar from "./components/NavBar";
-// import Home from "./components/Home";
-import { BrowserRouter as Router, Switch, Route,  } from "react-router-dom";
+import News from "./components/News";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import "./App.css";
 
 export default class App extends Component {
-  pageSize = 5;
+
+  constructor() {
+    super();
+    this.state = {
+      darkMode: false,
+      pageSize: 5,
+    };
+  }
+
+  toggleMode = () => {
+    if (this.state.darkMode === true) {
+      this.setState({ darkMode: false });
+      console.log(this.state.darkMode);
+    } else {
+      this.setState({ darkMode: true });
+      console.log(this.state.darkMode);
+    }
+  };
+
   render() {
     return (
-      <div className="">
+      <div className="App">
         <Router>
-          {/* <NavBar /> */}
+          <NavBar darkMode={this.state.darkMode} toggleMode={this.toggleMode} />
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home darkMode={this.state.darkMode}/>
             </Route>
             <Route exact path="/general">
-              <Home
+              <News
                 key="general"
-                pageSize={this.pageSize}
+                pageSize={this.state.pageSize}
                 country="in"
                 category="general"
               />
             </Route>
             <Route exact path="/business">
-              <Home
+              <News
                 key="business"
-                pageSize={this.pageSize}
+                pageSize={this.state.pageSize}
                 country="in"
                 category="business"
               />
             </Route>
             <Route exact path="/entertainment">
-              <Home
+              <News
                 key="entertainment"
-                pageSize={this.pageSize}
+                pageSize={this.state.pageSize}
                 country="in"
                 category="entertainment"
               />
             </Route>
             <Route exact path="/health">
-              <Home
+              <News
                 key="health"
-                pageSize={this.pageSize}
+                pageSize={this.state.pageSize}
                 country="in"
                 category="health"
               />
             </Route>
             <Route exact path="/science">
-              <Home
+              <News
                 key="science"
-                pageSize={this.pageSize}
+                pageSize={this.state.pageSize}
                 country="in"
                 category="science"
               />
             </Route>
             <Route exact path="/sports">
-              <Home
+              <News
                 key="sports"
-                pageSize={this.pageSize}
+                pageSize={this.state.pageSize}
                 country="in"
                 category="sports"
               />
             </Route>
             <Route exact path="/technology">
-              <Home
+              <News
                 key="technology"
-                pageSize={this.pageSize}
+                pageSize={this.state.pageSize}
                 country="in"
                 category="technology"
               />
             </Route>
           </Switch>
         </Router>
-        {/* <Home pageSize={this.pageSize} country="in" category="technology" /> */}
+        {/* <News pageSize={this.state.pageSize} country="in" category="technology" /> */}
       </div>
     );
   }
