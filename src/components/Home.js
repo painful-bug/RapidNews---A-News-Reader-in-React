@@ -34,18 +34,7 @@ export default class Home extends Component {
           </h3>
         
           
-        {/* <div className="form-check form-switch">
-          <input
-            className="form-check-input"
-            onClick={this.toggleMode}
-            type="checkbox"
-            role="switch"
-            id="flexSwitchCheckDefault"
-          />
-          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-            Enable Dark Mode
-          </label>
-        </div> */}
+  
         
         
         
@@ -61,6 +50,10 @@ export default class Home extends Component {
         </Link>
 
         <div id="news_section">
+          <br />
+          <br/>
+          <br/>
+          
           <News
             key="general"
             pageSize={this.pageSize}
