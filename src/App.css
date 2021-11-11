@@ -6,5 +6,7 @@
     #c850c0 46%,
     #ffcc70 100%
   );
+  /* background-blend-mode: overlay; */
   background-attachment: fixed;
+  
 }

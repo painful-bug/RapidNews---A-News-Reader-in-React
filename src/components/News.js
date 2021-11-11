@@ -9,7 +9,7 @@ export default class News extends Component {
     country: "in",
     pageSize: 6,
     category: "general",
-    darkMode: true,
+    darkMode: false,
   };
 
   static propTypes = {
@@ -107,20 +107,21 @@ export default class News extends Component {
       });
     }
   };
-
- 
+  
+  
 
   render() {
     return (
       <div className="container my-3" id="news_starting">
         {this.state.loading ? (
           <Spinner />
-        ) : (
-          <div>
-            {/* <h2 className="text-center my-3">RapidNews</h2> */}
-
+          ) : (
+            <div>
+           <br/>
+           <br/>
+            <h2 className="text-center px-3 my-5">{(this.props.category !== "general")&& this.props.category.charAt(0).toUpperCase() + this.props.category.slice(1)}</h2>
            
-              <div className="container d-flex justify-content-between">
+              <div className="container d-flex justify-content-between my-5">
               <button
                 disabled={this.state.page <= 1}
                 type="button"
@@ -144,7 +145,7 @@ export default class News extends Component {
               >
                 Next &rarr;
               </button>
-            </div>
+              </div>
 
             <div className="row my-3">
               {this.state.articles.map((article) => {

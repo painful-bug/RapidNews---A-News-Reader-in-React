@@ -6,13 +6,19 @@ export default class NavBar extends Component {
 
   listener = null;
   state = {
-    nav:false
+    nav: false,
+    mode: ""
   }
   componentDidMount() {
-     window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
+    // if (this.props.darkMode) {
+    //   this.state.mode = "dark"
+    // } else {
+    //   this.state.mode = "light"
+    // }
    }
    componentWillUnmount() {
-      window.removeEventListener('scroll');
+      window.removeEventListener('scroll',null);
     }
    handleScroll= () => {
      if (window.pageYOffset > 140) {
@@ -25,13 +31,15 @@ export default class NavBar extends Component {
          }
      }
 
-   }
+  }
+  
 
   render() {
     return (
       <div>
+      
         {/* <nav className={`navbar navbar-expand-lg navbar-dark bg-dark ${this.state.nav && 'Nav__black'}`}> */}
-        <nav className={`navbar navbar-expand-lg navbar-dark bg-dark navbarExtra scrolled`}>
+        <nav className={`navbar navbar-expand-lg navbar-${this.props.mode} bg-${this.props.mode} navbarExtra scrolled`}>
           <div className="container-fluid">
             <Link className="navbar-brand" to="/">
               RapidNews
@@ -44,7 +52,7 @@ export default class NavBar extends Component {
               aria-controls="navbarNav"
               aria-expanded="false"
               aria-label="Toggle navigation"
-            >
+              >
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
@@ -54,11 +62,7 @@ export default class NavBar extends Component {
                     Home
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/general">
-                    General
-                  </Link>
-                </li>
+                
                 <li className="nav-item">
                   <Link className="nav-link" to="/business">
                     Business
@@ -89,9 +93,17 @@ export default class NavBar extends Component {
                     Technology
                   </Link>
                 </li>
+                
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/search">
+                    Search
+                  </Link>
+                </li>
+              
+
               </ul>
             </div>
-
 
             <div className="form-check form-switch">
           <input
@@ -101,7 +113,7 @@ export default class NavBar extends Component {
             role="switch"
             id="flexSwitchCheckDefault"
           />
-          <label className="form-check-label text-light" htmlFor="flexSwitchCheckDefault">
+          <label className={`form-check-label text-${(this.props.mode == "dark")?"light":"dark"}`} htmlFor="flexSwitchCheckDefault">
             Enable Dark Mode
           </label>
         </div>
@@ -112,3 +124,6 @@ export default class NavBar extends Component {
     );
   }
 }
+
+
+// 
