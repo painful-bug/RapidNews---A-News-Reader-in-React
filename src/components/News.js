@@ -31,8 +31,22 @@ export default class News extends Component {
     };
   }
 
-  async componentDidMount() {
+
+  updateNews = async () => {
+    // this.setState({ loading: true });
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${this.state.page}`;
+    let data = await fetch(url);
     this.setState({ loading: true });
+    let parsedData = await data.json();
+    this.setState({
+      articles: parsedData.articles,
+      totalResults: parsedData.totalResults,
+      loading: false,
+    });
+  }
+
+  async componentDidMount() {
+    // this.setState({ loading: true });
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6`;
     let data = await fetch(url);
     this.setState({ loading: true });
@@ -46,76 +60,95 @@ export default class News extends Component {
     console.log(this.totalResults);
   }
 
+  // fetchNews = async () => {
+  //   this.setState({ loading: true });
+  //   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${this.state.page}`;
+  //   let data = await fetch(url);
+  //   this.setState({ loading: true });
+  //   let parsedData = await data.json();
+  //   console.log(parsedData);
+  //   this.setState({
+  //     articles: parsedData.articles,
+  //     totalResults: parsedData.totalResults,
+  //     loading: false,
+  //     page: this.page + 1,
+  //   });
+  // }
+
   handlePrevClick = async () => {
-    this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=${
-      this.props.country
-    }&category=${
-      this.props.category
-    }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
-      this.state.page - 1
-    }&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    this.setState({
-      articles: parsedData.articles,
-      page: this.state.page - 1,
-      disableNextButton: false,
-      loading: false,
-    });
-  };
+    this.setState({ page: this.state.page - 1 });
+    this.updateNews()
+  }
+  //   this.setState({ loading: true });
+  //   let url = `https://newsapi.org/v2/top-headlines?country=${
+  //     this.props.country
+  //   }&category=${
+  //     this.props.category
+  //   }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
+  //     this.state.page - 1
+  //   }&pageSize=${this.props.pageSize}`;
+  //   let data = await fetch(url);
+  //   let parsedData = await data.json();
+  //   this.setState({
+  //     articles: parsedData.articles,
+  //     page: this.state.page - 1,
+  //     disableNextButton: false,
+  //     loading: false,
+  //   });
+  // };
 
-  handleNextClick = async () => {
-    if (
-      Math.ceil(this.state.totalResults / this.props.pageSize) <
-      this.state.page + 1
-    ) {
-      this.setState({ loading: true });
-      let url = `https://newsapi.org/v2/top-headlines?country=${
-        this.props.country
-      }&category=${
-        this.props.category
-      }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
-        this.state.page + 1
-      }&pageSize=${this.props.pageSize}`;
-      let data = await fetch(url);
-      let parsedData = await data.json();
-
-      this.setState({
-        articles: parsedData.articles,
-        page: this.state.page + 1,
-        disableNextButton: false,
-        loading: false,
-      });
-    } else {
-      this.setState({ loading: true });
-      let url = `https://newsapi.org/v2/top-headlines?country=${
-        this.props.country
-      }&category=${
-        this.props.category
-      }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
-        this.state.page + 1
-      }&pageSize=${this.props.pageSize}`;
-      let data = await fetch(url);
-      let parsedData = await data.json();
-
-      this.setState({
-        articles: parsedData.articles,
-        page: this.state.page + 1,
-        disableNextButton: true,
-        loading: false,
-      });
+    handleNextClick = async () => { 
+      this.setState({ page: this.state.page + 1 });
+      this.updateNews()
     }
-  };
+  //   if (
+  //     Math.ceil(this.state.totalResults / this.props.pageSize) <
+  //     this.state.page + 1
+  //   ) {
+  //     this.setState({ loading: true });
+  //     let url = `https://newsapi.org/v2/top-headlines?country=${
+  //       this.props.country
+  //     }&category=${
+  //       this.props.category
+  //     }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
+  //       this.state.page + 1
+  //     }&pageSize=${this.props.pageSize}`;
+  //     let data = await fetch(url);
+  //     let parsedData = await data.json();
+
+  //     this.setState({
+  //       articles: parsedData.articles,
+  //       page: this.state.page + 1,
+  //       disableNextButton: false,
+  //       loading: false,
+  //     });
+  //   } else {
+  //     this.setState({ loading: true });
+  //     let url = `https://newsapi.org/v2/top-headlines?country=${
+  //       this.props.country
+  //     }&category=${
+  //       this.props.category
+  //     }&apiKey=37f2607dcff648e391b3d365742ebbc6&page=${
+  //       this.state.page + 1
+  //     }&pageSize=${this.props.pageSize}`;
+  //     let data = await fetch(url);
+  //     let parsedData = await data.json();
+
+  //     this.setState({
+  //       articles: parsedData.articles,
+  //       page: this.state.page + 1,
+  //       disableNextButton: true,
+  //       loading: false,
+  //     });
+  //   }
+  // };
   
   
 
   render() {
     return (
       <div className="container my-3" id="news_starting">
-        {this.state.loading ? (
-          <Spinner />
-          ) : (
+    
             <div>
            <br/>
            <br/>
@@ -166,7 +199,7 @@ export default class News extends Component {
               })}
             </div>
 
-            <div
+            {/* <div
               className="container d-flex justify-content-between"
               id="news_ending"
             >
@@ -193,9 +226,9 @@ export default class News extends Component {
               >
                 Next &rarr;
               </button>
-            </div>
+            </div> */}
           </div>
-        )}
+        
       </div>
     );
   }
